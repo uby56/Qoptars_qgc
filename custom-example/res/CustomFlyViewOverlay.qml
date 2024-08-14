@@ -91,6 +91,7 @@ Item {
 
     //-------------------------------------------------------------------------
     //-- Heading Indicator
+
     Rectangle {
         id:                         compassBar
         height:                     ScreenTools.defaultFontPixelHeight * 1.5

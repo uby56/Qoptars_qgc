@@ -179,8 +179,8 @@ Item {
     }
 
     // Value indicator
-    Canvas {
-        id:     indicatorCanvas
+    Canvas  {
+        id:    indicatorCanvas
         y:      sliderFlickable.y + _indicatorCenterPos - height / 2
         width:  Math.max(minIndicatorWidth, minTickDisplayWidth)
         height: indicatorHeight
@@ -219,8 +219,8 @@ Item {
             text:                   _clampedSliderValue(_sliderValue) + " " + unitsString
             font.pointSize:         ScreenTools.largeFontPointSize
 
-            property var unitsString: _sliderType === GuidedValueSlider.Speed ? 
-                                        QGroundControl.unitsConversion.appSettingsSpeedUnitsString : 
+            property var unitsString: _sliderType === GuidedValueSlider.Speed ?
+                                        QGroundControl.unitsConversion.appSettingsSpeedUnitsString :
                                             QGroundControl.unitsConversion.appSettingsVerticalDistanceUnitsString
         }
     }

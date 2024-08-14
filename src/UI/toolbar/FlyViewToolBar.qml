@@ -35,6 +35,7 @@ Rectangle {
 
     QGCPalette { id: qgcPal }
 
+
     /// Bottom single pixel divider
     Rectangle {
         anchors.left:   parent.left
@@ -95,7 +96,35 @@ Rectangle {
         flickableDirection:     Flickable.HorizontalFlick
 
         FlyViewToolBarIndicators { id: toolIndicators }
+
     }
+
+    //test button
+
+    // Rectangle {
+    //     property bool isClicked: true
+
+    //     id: botton
+    //     width: 60; height: 40; radius: 10
+
+    //     anchors.right: parent.right
+    //     anchors.top: parent.top
+    //     anchors.rightMargin: 10
+    //     anchors.topMargin: 5
+
+    //     color: "green"
+
+    //     Text {
+    //         anchors.centerIn: parent
+    //         text: "Button"
+    //         font.family: "Helvetica"
+    //     }
+
+    //     MouseArea {
+    //         anchors.fill: parent
+    //         onClicked: {parent.color = "red" }
+    //     }
+    // }
 
     //-------------------------------------------------------------------------
     //-- Branding Logo

@@ -16,6 +16,7 @@ import QGroundControl.ScreenTools
 
 Switch {
     id: control
+    property color switchColor: qgcPal.primaryButton
 
     readonly property int _radius: 3
 
@@ -36,7 +37,7 @@ Switch {
         x: control.width - width - control.rightPadding
         y: parent.height / 2 - height / 2
         radius: knob.radius
-        color: control.checked ? qgcPal.primaryButton : qgcPal.button
+        color: control.checked ? switchColor : "red"
 
         Rectangle {
             id: knob

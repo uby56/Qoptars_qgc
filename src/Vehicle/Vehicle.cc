@@ -6,7 +6,7 @@
  * COPYING.md in the root of the source code directory.
  *
  ****************************************************************************/
-
+#include <iostream>
 #include "Vehicle.h"
 #include "Actuators.h"
 #include "ADSBVehicleManager.h"
@@ -50,6 +50,8 @@
 #include "VideoSettings.h"
 #include <DeviceInfo.h>
 #include <StatusTextHandler.h>
+
+using namespace std;
 
 #ifdef CONFIG_UTM_ADAPTER
 #include "UTMSPVehicle.h"
@@ -3614,6 +3616,59 @@ void Vehicle::_altitudeAboveTerrainReceived(bool success, QList<double> heights)
     }
     // Clean up
     _altitudeAboveTerrTerrainAtCoordinateQuery = nullptr;
+}
+
+// Indoor outdoor vehicle parameter set
+void Vehicle::setIndoorParameter(){
+    Fact* fact_In;
+
+    // fact_In = _parameterManager->getParameter(_compID,"MAV_1_CONFIG");
+    // fact_In->setRawValue(101); //telem 1
+
+    fact_In = _parameterManager->getParameter(_compID,"EKF2_OF_CTRL");
+    fact_In->setRawValue(1);
+
+    // fact_In = _parameterManager->getParameter(_compID,"SER_TEL4_BAUD");
+    // fact_In->setRawValue(115200); //telem 1
+
+    fact_In = _parameterManager->getParameter(_compID,"EKF2_RNG_CTRL");
+    fact_In->setRawValue(1); //telem 1
+
+    fact_In = _parameterManager->getParameter(_compID,"EKF2_HGT_REF");
+    fact_In->setRawValue(2); //telem 1
+
+}
+
+void Vehicle::setOutdoorParameter(){
+    Fact* fact_Out;
+    // fact_Out = _parameterManager->getParameter(_compID,"MAV_1_CONFIG");
+    // fact_Out->setRawValue(101); //telem 1
+
+    fact_Out = _parameterManager->getParameter(_compID,"EKF2_OF_CTRL");
+    fact_Out->setRawValue(0);
+
+    // fact_Out = _parameterManager->getParameter(_compID,"SER_TEL4_BAUD");
+    // fact_Out->setRawValue(115200); //telem 1
+
+    fact_Out = _parameterManager->getParameter(_compID,"EKF2_RNG_CTRL");
+    fact_Out->setRawValue(0); //telem 1
+
+    fact_Out = _parameterManager->getParameter(_compID,"EKF2_HGT_REF");
+    fact_Out->setRawValue(1); //telem 1
+}
+
+void Vehicle::testReboot(){
+    sendMavCommand(
+        _defaultComponentId,
+        MAV_CMD_PREFLIGHT_REBOOT_SHUTDOWN ,
+        true,                               // show errors
+        1,           // Pitch 0 - 90
+        0,                                   // Roll (not used)
+        0,             // Yaw -180 - 180
+        0,                                   // Altitude (not used)
+        0,                                   // Latitude (not used)
+        0,                                   // Longitude (not used)
+        0);
 }
 
 void Vehicle::gimbalControlValue(double pitch, double yaw)

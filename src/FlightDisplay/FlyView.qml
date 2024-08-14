@@ -26,6 +26,7 @@ import QGroundControl.FlightMap
 import QGroundControl.Palette
 import QGroundControl.ScreenTools
 import QGroundControl.Vehicle
+import QGroundControl.FactControls
 
 // 3D Viewer modules
 import Viewer3D
@@ -80,6 +81,7 @@ Item {
         bottomEdgeLeftInset:    _pipView.bottomEdgeLeftInset
     }
 
+    //LOGO Toolbar
     FlyViewToolBar {
         id:         toolbar
         visible:    !QGroundControl.videoManager.fullScreen
@@ -147,6 +149,9 @@ Item {
             visible:            !QGroundControl.videoManager.fullScreen
         }
 
+        //custom Switch
+
+
         // Development tool for visualizing the insets for a paticular layer, show if needed
         FlyViewInsetViewer {
             id:                     widgetLayerInsetViewer
@@ -190,5 +195,46 @@ Item {
             id:                     viewer3DWindow
             anchors.fill:           parent
         }
+
+        QGCButton{
+            id: reboot
+            text: "Reboot"
+            anchors.right: parent.right
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.rightMargin: 10
+            MouseArea{
+                anchors.fill: parent
+                onClicked: {
+                    console.log("Reboot")
+                    _activeVehicle.testReboot()}
+            }
+        }
+
+        QGCSwitch{
+            id: testSwitch
+
+            text: checked ? qsTr("Outdoor") : qsTr("Indoor")
+            anchors.bottom: reboot.top
+            anchors.right: parent.right
+            anchors.bottomMargin: 20
+            anchors.rightMargin: 5
+            enabled: !_activeVehicle.flying
+            switchColor: "green"
+            onCheckedChanged:{
+
+                if(checked){
+                    _activeVehicle.setOutdoorParameter()
+                }
+                else{
+                    _activeVehicle.setIndoorParameter()
+                }
+
+
+            }
+
+        }
+
     }
 }
+
+

@@ -8,6 +8,7 @@
  ****************************************************************************/
 
 #pragma once
+#include <iostream>
 
 #include <QtCore/QElapsedTimer>
 #include <QtCore/QObject>
@@ -44,6 +45,7 @@
 #include "VehicleVibrationFactGroup.h"
 #include "VehicleWindFactGroup.h"
 
+using namespace std;
 class Actuators;
 class AutoPilotPlugin;
 class Autotune;
@@ -805,6 +807,9 @@ public:
     HealthAndArmingCheckReport* healthAndArmingCheckReport() { return &_healthAndArmingCheckReport; }
 
 public slots:
+    void setIndoorParameter                   ();
+    void setOutdoorParameter                   ();
+    void testReboot                          ();
     void setVtolInFwdFlight                 (bool vtolInFwdFlight);
     void _offlineFirmwareTypeSettingChanged (QVariant varFirmwareType); // Should only be used by MissionControler to set firmware from Plan file
     void _offlineVehicleTypeSettingChanged  (QVariant varVehicleType);  // Should only be used by MissionController to set vehicle type from Plan file

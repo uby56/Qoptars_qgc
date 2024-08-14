@@ -15,6 +15,7 @@ qt_add_library(FactSystem STATIC
     ParameterManager.h
     SettingsFact.cc
     SettingsFact.h
+
 )
 
 target_link_libraries(FactSystem
